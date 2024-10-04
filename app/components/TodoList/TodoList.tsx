@@ -14,8 +14,6 @@ interface Task {
 export const TodoList: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    let newText: string;
-
 
     useEffect(() => {
         const storedTasks = localStorage.getItem('tasks');
@@ -24,12 +22,17 @@ export const TodoList: React.FC = () => {
         }
     }, [])
 
-    const handleEditTask = (id: number, newText: string) => {
-        setTasks(prevTasks =>
-            prevTasks.map((task) =>
-                task.id === id ? { ...task, text: newText } : task
-            )
+    useEffect(() => {
+        if (tasks.length > 0) {
+            saveTasksToLocalStorage(tasks)
+        }
+    }, [tasks])
+
+    const handleEditTask = (taskId: number, newText: string) => {
+        const updatedTasks = tasks.map((task) =>
+            task.id === taskId ? { ...task, text: newText } : task
         )
+        setTasks(updatedTasks);
     }
 
     const handleAddTask = (taskText: string) => {
@@ -47,7 +50,6 @@ export const TodoList: React.FC = () => {
         if (confirmDelete) {
             const updatedTasks = tasks.filter((task) => task.id !== taskId)
             setTasks(updatedTasks);
-            saveTasksToLocalStorage(updatedTasks);
         }
     }
 
@@ -55,7 +57,7 @@ export const TodoList: React.FC = () => {
         const confirmDelete = confirm("Вы действительно хотите удалить все задачи?");
         if (confirmDelete) {
             setTasks([]);
-            saveTasksToLocalStorage([])
+            localStorage.removeItem('tasks');
         }
     }
 
@@ -64,7 +66,6 @@ export const TodoList: React.FC = () => {
             task.id === taskId ? { ...task, completed: !task.completed } : task
         )
         setTasks(updatedTasks);
-        saveTasksToLocalStorage(updatedTasks);
     }
 
     return (
@@ -81,7 +82,7 @@ export const TodoList: React.FC = () => {
                         key={task.id}
                         task={task}
                         onDelete={() => deleteTask(task.id)}
-                        onEdit={() => handleEditTask(task.id, newText)}
+                        onEdit={(newText: string) => handleEditTask(task.id, newText)}
                         onToggle={() => toggleTaskCompletiton(task.id)}
                     />
                 ))}
