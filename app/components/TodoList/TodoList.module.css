@@ -1,0 +1,41 @@
+.TodoList {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.Button {
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  min-height: 30px;
+  border: 1px solid #000;
+}
+
+.todos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 1440px) {
+  .TodoList {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .todos-list {
+    font-size: 14px;
+  }
+}

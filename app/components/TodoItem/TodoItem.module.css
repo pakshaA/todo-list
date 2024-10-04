@@ -1,0 +1,65 @@
+.TodoItem {
+  background-color: #fff;
+  width: 250px;
+  height: 150px;
+  flex: 0 1 30%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  border-radius: 10px 35px 25px 40px;
+  border: 1px solid #000;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.button {
+  background-color: #fff;
+  border: none;
+}
+
+.buttons-container {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-div {
+  width: 90%;
+}
+
+.input-text {
+  width: 90%;
+  height: 80%;
+  resize: none;
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.count {
+  margin: 0;
+  font-size: 14px;
+}
+
+.checked {
+  transform: translate(-5px, -10px);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1440px) {
+  .TodoItem {
+    flex: 0 1 40%;
+    min-width: 240px;
+  }
+}
+
+@media (max-width: 576px) {
+  .TodoItem {
+    flex: 0 1 100%;
+  }
+}
